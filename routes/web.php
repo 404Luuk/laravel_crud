@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get("/", [BierController::class, 'index']);
-Route::resource('bier', BierController::class);
+
+Route::get('/create', [BierController::class, 'create']); // route to view
+Route::post('/create', [BierController::class, 'store']); // store to db
