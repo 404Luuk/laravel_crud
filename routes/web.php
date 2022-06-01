@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BierController;
+use App\Models\Bier;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get("/", [BierController::class, 'index']);
+
+Route::redirect('/', '/index');
+Route::get("/index", [BierController::class, 'index']);
 
 Route::get('/create', [BierController::class, 'create']); // route to view
 Route::post('/create', [BierController::class, 'store']); // store to db
+Route::get('/show/{bier}', [BierController::class, 'show']); // return specific item
+Route::get('/edit/{bier}', [BierController::class, 'edit']);
+Route::put('/edit/{bier}', [BierController::class, 'update']);
+Route::delete('/show/{bier}', [BierController::class, 'destroy']);

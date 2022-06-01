@@ -6,8 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;       
-
+use Illuminate\Support\Facades\DB;
 
 class BierController extends Controller
 {
@@ -36,7 +35,7 @@ class BierController extends Controller
        *
        * @return \Illuminate\Http\Response
        */
-      public function create()
+      public function create() // returns view to create new item
       {
          return view('create');
       }
@@ -55,7 +54,7 @@ class BierController extends Controller
             'alcoholpercentage' => $request->alcoholpercentage,
          ]);
 
-         return redirect('/');
+         return redirect('/')->with('message', "Bier toegevoegd");
       }
 
       /**
@@ -64,9 +63,11 @@ class BierController extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function show($id)
+      public function show($id) // return beerpage by id
       {
-         //
+         $bier = DB::table('bier')->where('biernummer', $id)->first();
+
+         return view('/show' , ['bier'=>$bier]);
       }
 
       /**
@@ -75,9 +76,9 @@ class BierController extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function edit($id)
+      public function edit(Bier $bier)
       {
-         //
+         return view('/edit', ['bier'=>$bier]);
       }
 
       /**
@@ -87,9 +88,15 @@ class BierController extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function update(Request $request, $id)
+      public function update(Request $request, Bier $bier)
       {
-         //
+         $bier->update([
+            'naam'=>$request->naam,
+            'soort'=>$request->soort,
+            'alcoholpercentage'=>$request->alcoholpercentage
+         ]);
+
+         return redirect('/')->with('message', 'beer updated');
       }
 
       /**
@@ -98,8 +105,10 @@ class BierController extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function destroy($id)
+      public function destroy(Bier $bier)
       {
-         //
+         $bier->delete();
+
+         return redirect('/')->with('message', 'beer deleted');
       }
 }
