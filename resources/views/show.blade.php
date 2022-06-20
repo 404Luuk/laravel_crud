@@ -9,9 +9,19 @@
 <body>
 
     <div>
-        <strong>{{$bier->naam}}</strong> <br>
+        <strong>{{$bier->naam}}</strong> <br> <br>
         <span>{{$bier->soort}}</span> <br>
-        <span>alchoholpercentage: {{$bier->alcoholpercentage}}</span>
+        <span>alchoholpercentage: {{$bier->alcoholpercentage}}</span> <br> <br>
+        <tr>
+         <td><button><a href="/edit/{{$bier->biernummer}}">Aanpassen</a></button></td> <br> <br>
+         <td>
+            <form method="POST" action="{{route('item.remove',$bier->biernummer)}}">
+               @method('DELETE') <!-- Define delete method for form -->
+               @csrf
+               <button onclick="return confirm('Do you really want to delete {{$bier->naam}}')">Delete</button>
+            </form>
+         </td> <br>
+        </tr>
     </div>
 </body>
 </html>
@@ -22,8 +32,11 @@
         border: 1px solid black;
         padding: 20px;
         width: 200px;
-        margin: 50px;
+        margin: 10px;
     }
-
+    button a {
+       text-decoration: none;
+       color: black
+    }
 
 </style>

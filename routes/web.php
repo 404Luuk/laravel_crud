@@ -19,8 +19,9 @@ Route::redirect('/', '/index');
 Route::get("/index", [BierController::class, 'index']);
 
 Route::get('/create', [BierController::class, 'create']); // route to view
-Route::post('/create', [BierController::class, 'store']); // store to db
+Route::post('/create', [BierController::class, 'store']); // store to DB
 Route::get('/show/{bier}', [BierController::class, 'show']); // return specific item
-Route::get('/edit/{bier}', [BierController::class, 'edit']);
-Route::put('/edit/{bier}', [BierController::class, 'update']);
-Route::delete('/show/{bier}', [BierController::class, 'destroy']);
+Route::get('/edit/{bier}', [BierController::class, 'edit']); // return edit page for this item
+Route::put('/edit/{bier}', [BierController::class, 'update']); // add to DB 
+Route::delete('/remove/{bier}', [BierController::class, 'destroy'])->name('item.remove'); // removes item from DB
+Route::get('/search/{query}', [BierController::class, 'search'])->name('item.search');

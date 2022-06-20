@@ -11,11 +11,18 @@ use Illuminate\Support\Facades\DB;
 class BierController extends Controller
 {
       /**
+       * TODO:
+       * Add join to index for easy viewing?
+       * Create joint edit page ?
+       * Add styling <
+       *  */ 
+
+      /**
        * Display a listing of the resource.
        *
        * @return \Illuminate\Http\Response
        */
-      public function index() // Join tables for easy viewing? <<
+      public function index() 
       {
             $bieren = DB::table("bier")->get()->sortByDesc('biernummer');
             $bierkaarten = DB::table("bierkaart")->get();
@@ -63,10 +70,8 @@ class BierController extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function show($id) // return beerpage by id
+      public function show(Bier $bier)
       {
-         $bier = DB::table('bier')->where('biernummer', $id)->first();
-
          return view('/show' , ['bier'=>$bier]);
       }
 
@@ -109,6 +114,6 @@ class BierController extends Controller
       {
          $bier->delete();
 
-         return redirect('/')->with('message', 'beer deleted');
+         return redirect('/index')->with('message', 'beer deleted');
       }
 }

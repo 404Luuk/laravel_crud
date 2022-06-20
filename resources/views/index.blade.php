@@ -42,10 +42,10 @@
          <td><a href="/show/{{$bier->biernummer}}">Toon bier</a></td>
          <td><a href="/edit/{{$bier->biernummer}}">Aanpassen</a></td>
          <td>
-            <form method="POST">
-               @method('DELETE')
+            <form method="POST" action="{{route('item.remove',$bier->biernummer)}}">
+               @method('DELETE') 
                @csrf
-               <button onclick="return confirm('Do you really want to delete this beer?')">Delete</button>
+               <button onclick="return confirm('Do you really want to delete {{$bier->naam}}')">Delete</button>
             </form>
          </td>
       </tr>
