@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class BierController extends Controller
 {
-      /**
-       * TODO:
-       * Add join to index for easy viewing?
-       * Create joint edit page ?
-       * Add styling <
-       *  */ 
 
       /**
        * Display a listing of the resource.
@@ -25,15 +19,9 @@ class BierController extends Controller
       public function index() 
       {
             $bieren = DB::table("bier")->get()->sortByDesc('biernummer');
-            $bierkaarten = DB::table("bierkaart")->get();
-            $brouwerijen = DB::table("brouwerij")->get();
-            $cafes = DB::table("cafe")->get();
 
             return view("index", [
                "bieren" => $bieren,
-               "bierkaarten" => $bierkaarten,
-               "brouwerijen" => $brouwerijen,
-               "cafes" => $cafes,
             ]);
       }
 
@@ -114,6 +102,6 @@ class BierController extends Controller
       {
          $bier->delete();
 
-         return redirect('/index')->with('message', 'beer deleted');
+         return redirect('/')->with('message', 'beer deleted');
       }
 }

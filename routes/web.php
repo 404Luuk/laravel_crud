@@ -24,4 +24,3 @@ Route::get('/show/{bier}', [BierController::class, 'show']); // return specific 
 Route::get('/edit/{bier}', [BierController::class, 'edit']); // return edit page for this item
 Route::put('/edit/{bier}', [BierController::class, 'update']); // add to DB 
 Route::delete('/remove/{bier}', [BierController::class, 'destroy'])->name('item.remove'); // removes item from DB
-Route::get('/search/{query}', [BierController::class, 'search'])->name('item.search');

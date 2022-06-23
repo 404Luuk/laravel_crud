@@ -18,6 +18,9 @@
       <div class="nav_buttons">
          <a href="/create" class="btn">Add beer</a>
       </div>
+         
+            
+         
     
       @if(\Session::has('message'))
       <div class="prompt btn">
